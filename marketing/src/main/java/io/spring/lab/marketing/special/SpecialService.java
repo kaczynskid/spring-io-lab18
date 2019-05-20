@@ -3,11 +3,14 @@ package io.spring.lab.marketing.special;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import io.spring.lab.marketing.special.calculate.SpecialCalculation;
 import io.spring.lab.marketing.special.calculate.SpecialCalculator;
 import io.spring.lab.marketing.special.select.SpecialSelector;
 import io.spring.lab.math.MathProperties;
 
+@Component
 public class SpecialService {
 
 	private final SpecialRepository specials;

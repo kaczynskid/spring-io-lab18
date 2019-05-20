@@ -4,12 +4,15 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.springframework.stereotype.Component;
+
 import io.spring.lab.marketing.special.calculate.SpecialCalculator;
 import io.spring.lab.math.MathProperties;
 
 import static io.spring.lab.marketing.special.calculate.SpecialCalculator.regularPrice;
 import static java.util.Comparator.comparing;
 
+@Component
 public class BestSpecialSelector implements SpecialSelector {
 
 	private final MathProperties math;
