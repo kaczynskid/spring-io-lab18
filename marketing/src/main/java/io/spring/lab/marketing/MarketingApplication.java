@@ -9,18 +9,12 @@ import org.springframework.context.annotation.Bean;
 
 import io.spring.lab.marketing.special.Special;
 import io.spring.lab.marketing.special.SpecialRepository;
-import io.spring.lab.math.MathProperties;
 
 @SpringBootApplication
 public class MarketingApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MarketingApplication.class, args);
-    }
-
-    @Bean
-    MathProperties mathProperties() {
-        return new MathProperties();
     }
 
     @Bean
