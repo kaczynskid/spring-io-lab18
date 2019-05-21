@@ -29,6 +29,13 @@ public class JpaItemRepository implements ItemRepository {
         return items.save(item);
     }
 
+    @Override
+    public Item findMostExpensive() {
+        return items.findTopByOrderByPriceDesc();
+    }
+
     interface SpringDataItemRepository extends JpaRepository<Item, Long> {
+
+        Item findTopByOrderByPriceDesc();
     }
 }

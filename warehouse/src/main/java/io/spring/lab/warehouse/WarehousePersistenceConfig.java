@@ -25,9 +25,9 @@ public class WarehousePersistenceConfig {
 
     public static List<Item> testItemsData() {
         return Arrays.asList(
-                new Item(null, "A", 100, BigDecimal.valueOf(40.0)),
+                new Item(null, "A", 100, BigDecimal.valueOf(30.0)),
                 new Item(null, "B", 100, BigDecimal.valueOf(10.0)),
-                new Item(null, "C", 100, BigDecimal.valueOf(30.0)),
+                new Item(null, "C", 100, BigDecimal.valueOf(40.0)),
                 new Item(null, "D", 100, BigDecimal.valueOf(25.0))
         );
     }

@@ -47,7 +47,7 @@ public class ItemControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.[0].name").value("A"))
-                .andExpect(jsonPath("$.[0].price").value("40.0"));
+                .andExpect(jsonPath("$.[0].price").value("30.0"));
     }
 
     @Test

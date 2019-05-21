@@ -10,4 +10,7 @@ public interface ItemRepository {
     List<Item> findAll();
 
     Item save(Item item);
+
+    Item findMostExpensive();
+
 }
