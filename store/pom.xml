@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.spring.lab</groupId>
-	<artifactId>marketing</artifactId>
+	<artifactId>store</artifactId>
 	<version>0.0.18-SNAPSHOT</version>
-	<name>Spring IO Lab Marketing</name>
-	<description>Spring IO Lab Marketing</description>
+	<name>Spring IO Lab Store</name>
+	<description>Spring IO Lab Store</description>
 
 	<properties>
 		<java.version>1.8</java.version>
