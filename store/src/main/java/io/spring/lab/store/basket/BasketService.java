@@ -2,10 +2,13 @@ package io.spring.lab.store.basket;
 
 import java.util.function.Supplier;
 
+import org.springframework.stereotype.Component;
+
 import io.spring.lab.math.MathProperties;
 import io.spring.lab.store.basket.item.BasketItemService;
 import lombok.AllArgsConstructor;
 
+@Component
 @AllArgsConstructor
 public class BasketService {
 

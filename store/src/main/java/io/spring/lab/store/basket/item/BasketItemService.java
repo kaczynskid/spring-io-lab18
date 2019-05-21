@@ -2,6 +2,8 @@ package io.spring.lab.store.basket.item;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import io.spring.lab.math.MathProperties;
 import io.spring.lab.store.basket.BasketUpdateDiff;
 import io.spring.lab.store.item.ItemRepresentation;
@@ -13,6 +15,7 @@ import lombok.AllArgsConstructor;
 
 import static io.spring.lab.store.special.SpecialCalculationRequest.requestCalculationFor;
 
+@Component
 @AllArgsConstructor
 public class BasketItemService {
 

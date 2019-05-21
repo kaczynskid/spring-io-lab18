@@ -5,6 +5,10 @@ import java.util.Optional;
 
 public interface BasketItemRepository {
 
+	boolean isEmpty();
+
+	long count();
+
 	BasketItem save(BasketItem basketItem);
 
 	BasketItem saveAndFlush(BasketItem basketItem);

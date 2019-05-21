@@ -2,6 +2,14 @@ package io.spring.lab.store.basket.item;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import org.apache.commons.lang3.Validate;
 
 import io.spring.lab.math.MathProperties;
@@ -15,7 +23,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import static java.math.BigDecimal.ZERO;
+import static javax.persistence.GenerationType.IDENTITY;
 
+@Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,18 +33,30 @@ import static java.math.BigDecimal.ZERO;
 @ToString
 public class BasketItem {
 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	private Long id;
 
+	@NotNull
 	private Long basketId;
 
+	@NotNull
 	private Long itemId;
 
+	@NotNull
+	@Column(columnDefinition = "text")
 	private String name;
 
+	@NotNull
+	@DecimalMin("0.01")
 	private BigDecimal unitPrice = ZERO;
 
+	@NotNull
+	@Min(1)
 	private int unitCount = 0;
 
+	@NotNull
+	@DecimalMin("0.01")
 	private BigDecimal totalPrice = ZERO;
 
 	private String specialId;

@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: "jdbc:mysql://${MYSQL_PORT_3306_TCP_ADDR:localhost}:${MYSQL_PORT_3306_TCP_PORT:3306}/store?autoReconnect=true&useSSL=false"
+    username: "root"
+    password: "sprio"
+  jpa:
+    hibernate:
+      ddl-auto: "validate"

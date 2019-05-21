@@ -16,6 +16,16 @@ public class StubBasketItemRepository implements BasketItemRepository {
     private final Map<Long, BasketItem> db = new HashMap<>();
 
     @Override
+    public boolean isEmpty() {
+        return db.isEmpty();
+    }
+
+    @Override
+    public long count() {
+        return db.size();
+    }
+
+    @Override
     public List<BasketItem> findByBasketId(long basketId) {
         return db.values().stream()
                 .filter(it -> it.getBasketId() == basketId)
