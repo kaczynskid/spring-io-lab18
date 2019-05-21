@@ -7,11 +7,13 @@ import java.util.List;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import io.spring.lab.warehouse.item.Item;
 import io.spring.lab.warehouse.item.ItemRepository;
 
 @Configuration
+@EnableJpaRepositories(considerNestedRepositories = true)
 public class WarehousePersistenceConfig {
 
     @Bean
