@@ -7,14 +7,14 @@ Contract.make {
         method('GET')
         url('/items/11')
         headers {
-            header('Accept', 'application/json')
+            header('Accept', 'application/json;charset=UTF-8')
         }
     }
 
     response {
         status(200)
         headers {
-            header('Content-Type', 'application/json')
+            header('Content-Type', 'application/json;charset=UTF-8')
         }
         body([
                 name: 'Coffee Mug',
