@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: "jdbc:postgresql://${POSTGRES_PORT_5432_TCP_ADDR:localhost}:${POSTGRES_PORT_5432_TCP_PORT:5432}/${POSTGRES_DB:warehouse}"
+    username: "${POSTGRES_USER:postgres}"
+    password: "${POSTGRES_PASSWORD:sprio}"
+  jpa:
+    hibernate:
+      ddl-auto: "create-drop"
