@@ -19,7 +19,9 @@ public class WarehousePersistenceConfig {
     @Bean
     public static ApplicationRunner testDataInitializer(ItemRepository items) {
         return args -> {
-            testItemsData().forEach(items::save);
+            if (items.isEmpty()) {
+                testItemsData().forEach(items::save);
+            }
         };
     }
 

@@ -21,6 +21,16 @@ public class JpaItemRepository implements ItemRepository {
     private final SpringDataItemRepository items;
 
     @Override
+    public boolean isEmpty() {
+        return items.count() == 0;
+    }
+
+    @Override
+    public long count() {
+        return items.count();
+    }
+
+    @Override
     public Optional<Item> findOne(long id) {
         return items.findById(id);
     }

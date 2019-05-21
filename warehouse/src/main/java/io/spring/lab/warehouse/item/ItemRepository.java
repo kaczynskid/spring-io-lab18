@@ -13,6 +13,10 @@ public interface ItemRepository {
         return item.name.startsWith(prefix);
     }
 
+    boolean isEmpty();
+
+    long count();
+
     Optional<Item> findOne(long id);
 
     List<Item> findAll();
