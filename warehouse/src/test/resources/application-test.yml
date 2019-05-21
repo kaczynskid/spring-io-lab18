@@ -3,3 +3,11 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: "none"
+
+management:
+  metrics:
+    export:
+      jmx:
+        enabled: false
+      graphite:
+        enabled: false

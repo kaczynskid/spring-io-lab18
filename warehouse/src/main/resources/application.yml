@@ -12,8 +12,19 @@ management:
     port: 8081
   endpoints:
     web:
+      base-path: "/admin"
       exposure:
         include: "*"
   endpoint:
     health:
       show-details: always
+  metrics:
+    export:
+      jmx:
+        enabled: true
+      graphite:
+        enabled: true
+        host: "localhost"
+        port: 2003
+        protocol: "plaintext"
+        step: "5s"
