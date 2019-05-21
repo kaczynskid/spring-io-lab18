@@ -1,12 +1,17 @@
 package io.spring.lab.marketing.special;
 
 import java.util.List;
+import java.util.Optional;
 
 import io.spring.lab.marketing.special.calculate.SpecialCalculator;
 
 public interface SpecialRepository {
 
-	Special findOne(String id);
+	boolean isEmpty();
+
+	long count();
+
+	Optional<Special> findOne(String id);
 
 	List<Special> findAll();
 

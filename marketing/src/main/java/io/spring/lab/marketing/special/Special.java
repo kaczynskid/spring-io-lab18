@@ -1,8 +1,13 @@
 package io.spring.lab.marketing.special;
 
 import java.math.BigDecimal;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.Validate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import io.spring.lab.marketing.special.calculate.SpecialCalculation;
 import io.spring.lab.marketing.special.calculate.SpecialCalculator;
@@ -15,6 +20,7 @@ import lombok.ToString;
 
 import static java.math.BigDecimal.ZERO;
 
+@Document
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,12 +28,18 @@ import static java.math.BigDecimal.ZERO;
 @ToString
 public class Special implements SpecialCalculator {
 
+	@Id
 	private String id;
 
+	@NotNull
 	private long itemId;
 
+	@NotNull
+	@Min(2)
 	private int batchSize = 1;
 
+	@NotNull
+	@DecimalMin("0.01")
 	private BigDecimal batchPrice = ZERO;
 
 	public SpecialCalculation calculateFor(int unitCount, BigDecimal unitPrice, MathProperties math) {

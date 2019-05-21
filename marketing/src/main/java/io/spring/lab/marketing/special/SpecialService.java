@@ -24,7 +24,8 @@ public class SpecialService {
 	}
 
 	public Special findOne(String id) {
-		return specials.findOne(id);
+		return specials.findOne(id)
+				.orElseThrow(() -> new NullPointerException("Special " + id + " not found!"));
 	}
 
 	public List<Special> findAll() {

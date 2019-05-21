@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
-
-import org.springframework.stereotype.Component;
 
 import io.spring.lab.marketing.special.calculate.SpecialCalculator;
 
@@ -14,14 +13,23 @@ import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.reflect.FieldUtils.writeField;
 
-@Component
 class StubSpecialRepository implements SpecialRepository {
 
     private final Map<String, Special> db = new HashMap<>();
 
     @Override
-    public Special findOne(String id) {
-        return db.get(id);
+    public boolean isEmpty() {
+        return db.isEmpty();
+    }
+
+    @Override
+    public long count() {
+        return db.size();
+    }
+
+    @Override
+    public Optional<Special> findOne(String id) {
+        return Optional.ofNullable(db.get(id));
     }
 
     @Override
