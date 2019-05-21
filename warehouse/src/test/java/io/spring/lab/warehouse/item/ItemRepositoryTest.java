@@ -5,28 +5,24 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Repository;
-import org.springframework.test.context.junit4.SpringRunner;
 
+import io.spring.lab.warehouse.SpringTestBase;
 import io.spring.lab.warehouse.WarehousePersistenceConfig;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.context.annotation.FilterType.ANNOTATION;
 import static org.springframework.context.annotation.FilterType.ASSIGNABLE_TYPE;
 
-@RunWith(SpringRunner.class)
 @DataJpaTest(includeFilters = {
         @ComponentScan.Filter(type = ASSIGNABLE_TYPE, classes = WarehousePersistenceConfig.class),
         @ComponentScan.Filter(type = ANNOTATION, classes = Repository.class)
 })
-@AutoConfigureTestDatabase
-public class ItemRepositoryTest {
+public class ItemRepositoryTest extends SpringTestBase {
 
     @Autowired
     TestEntityManager jpa;
@@ -49,7 +45,7 @@ public class ItemRepositoryTest {
         assertThat(item.getId()).isGreaterThan(0L);
         assertThat(item.getName()).isEqualTo("E");
         assertThat(item.getCount()).isEqualTo(99);
-        assertThat(item.getPrice()).isEqualTo(BigDecimal.valueOf(3330, 2));
+        assertThat(item.getPrice()).isEqualTo(BigDecimal.valueOf(333000, 4));
     }
 
     @Test
@@ -62,7 +58,7 @@ public class ItemRepositoryTest {
         theOne.ifPresent(item -> {
             assertThat(item.getName()).isEqualTo("A");
             assertThat(item.getCount()).isEqualTo(100);
-            assertThat(item.getPrice()).isEqualTo(BigDecimal.valueOf(3000, 2));
+            assertThat(item.getPrice()).isEqualTo(BigDecimal.valueOf(300000, 4));
         });
     }
 
@@ -74,7 +70,7 @@ public class ItemRepositoryTest {
         // then
         assertThat(item).isNotNull();
         assertThat(item.getId()).isEqualTo(3L);
-        assertThat(item.getPrice()).isEqualTo(BigDecimal.valueOf(4000, 2));
+        assertThat(item.getPrice()).isEqualTo(BigDecimal.valueOf(400000, 4));
     }
 
     @Test
