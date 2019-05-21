@@ -1,5 +1,6 @@
 package io.spring.lab.warehouse.item;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import static java.util.stream.Collectors.toList;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Slf4j
@@ -49,7 +51,11 @@ public class ItemController {
     public ResponseEntity<?> create(@RequestBody ItemRepresentation request) {
         Item item = items.create(request.asItem());
         log.info("Created item {}.", item.getName());
-        return ResponseEntity.status(CREATED).build();
+        return ResponseEntity.created(selfUriOf(item)).build();
+    }
+
+    private static URI selfUriOf(Item item) {
+        return linkTo(methodOn(ItemController.class).findOne(item.getId())).toUri();
     }
 
     @PutMapping("/{id}/stock")
