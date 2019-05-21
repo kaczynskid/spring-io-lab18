@@ -1,6 +1,7 @@
 package io.spring.lab.warehouse.item;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -74,5 +75,19 @@ public class ItemRepositoryTest {
         assertThat(item).isNotNull();
         assertThat(item.getId()).isEqualTo(3L);
         assertThat(item.getPrice()).isEqualTo(BigDecimal.valueOf(4000, 2));
+    }
+
+    @Test
+    public void shouldFindByNamePrefix() {
+        // given
+        Item item = jpa.persistAndFlush(
+                new Item(null, "Xero", 10, BigDecimal.valueOf(999.99)));
+
+        // when
+        List<Item> found = items.findByNamePrefix("X");
+
+        // then
+        assertThat(found).hasSize(1);
+        assertThat(found).containsExactly(item);
     }
 }

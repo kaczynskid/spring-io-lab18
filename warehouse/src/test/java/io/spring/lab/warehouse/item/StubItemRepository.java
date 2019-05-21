@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 import static java.util.Optional.ofNullable;
+import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.reflect.FieldUtils.writeField;
 
 class StubItemRepository implements ItemRepository {
@@ -38,6 +39,13 @@ class StubItemRepository implements ItemRepository {
         return db.values().stream()
                 .max(Comparator.comparing(Item::getPrice))
                 .orElseThrow(() -> new RuntimeException("Empty DB!"));
+    }
+
+    @Override
+    public List<Item> findByNamePrefix(String prefix) {
+        return db.values().stream()
+                .filter(item -> item.getName().startsWith(prefix))
+                .collect(toList());
     }
 
     private long setAndGetNextId(Item item) {

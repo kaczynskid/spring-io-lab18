@@ -13,4 +13,5 @@ public interface ItemRepository {
 
     Item findMostExpensive();
 
+    List<Item> findByNamePrefix(String prefix);
 }
