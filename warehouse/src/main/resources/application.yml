@@ -1,3 +1,6 @@
+server:
+  port: 9100
+
 spring:
   datasource:
     url: "jdbc:postgresql://${POSTGRES_PORT_5432_TCP_ADDR:localhost}:${POSTGRES_PORT_5432_TCP_PORT:5432}/${POSTGRES_DB:warehouse}"
@@ -21,10 +24,6 @@ management:
   metrics:
     export:
       jmx:
-        enabled: true
+        enabled: false
       graphite:
-        enabled: true
-        host: "localhost"
-        port: 2003
-        protocol: "plaintext"
-        step: "5s"
+        enabled: false
