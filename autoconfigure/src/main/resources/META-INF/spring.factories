@@ -1,2 +1,10 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  io.spring.lab.math.MathAutoConfiguration
+  io.spring.lab.math.MathAutoConfiguration,\
+  io.spring.lab.web.client.rewrite.UriCustomizerAutoConfiguration
+
+org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient=\
+  io.spring.lab.web.client.rewrite.UriCustomizerAutoConfiguration
+
+org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner=\
+  io.spring.lab.stubrunner.StubRunnerUriCustomizerAutoConfiguration
+
