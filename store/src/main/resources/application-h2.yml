@@ -1,8 +1,0 @@
-spring:
-  datasource:
-    url: "jdbc:h2:mem:store;MODE=MySQL;IGNORECASE=TRUE;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false;INIT=RUNSCRIPT FROM 'classpath:db/init_h2.sql';"
-    username: ""
-    password: ""
-  jpa:
-    hibernate:
-      ddl-auto: "none"

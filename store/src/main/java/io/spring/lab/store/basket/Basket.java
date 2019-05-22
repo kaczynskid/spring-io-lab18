@@ -1,7 +1,6 @@
 package io.spring.lab.store.basket;
 
 import java.math.BigDecimal;
-
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
