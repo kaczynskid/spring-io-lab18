@@ -2,28 +2,44 @@ package io.spring.lab.store.basket;
 
 import java.math.BigDecimal;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureMockRestServiceServer;
+import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
+import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
+import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
+import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import io.spring.lab.math.MathProperties;
 import io.spring.lab.store.basket.item.BasketItem;
 import io.spring.lab.store.basket.item.BasketItemRepository;
 import io.spring.lab.store.basket.item.BasketItemService;
 import io.spring.lab.store.basket.item.StubBasketItemRepository;
-import io.spring.lab.store.item.ItemRepresentation;
 import io.spring.lab.store.item.ItemsClient;
-import io.spring.lab.store.special.SpecialCalculation;
+import io.spring.lab.store.item.SimpleItemsClient;
+import io.spring.lab.store.special.SimpleSpecialClient;
 import io.spring.lab.store.special.SpecialClient;
 
-import static io.spring.lab.store.special.SpecialCalculationRequest.requestCalculationFor;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.doReturn;
 
+@RunWith(SpringRunner.class)
+@RestClientTest(components = {
+        SimpleItemsClient.class,
+        SimpleSpecialClient.class
+})
+@AutoConfigureStubRunner(ids = {
+        "io.spring.lab:warehouse",
+        "io.spring.lab:marketing"
+}, stubsMode = StubRunnerProperties.StubsMode.LOCAL)
+@AutoConfigureWebClient(registerRestTemplate = true)
+@AutoConfigureMockRestServiceServer(enabled = false)
 public class BasketServiceStubTest {
 
     static final long ITEM_ID = 11L;
     static final String ITEM_NAME = "Coffee Mug";
-    static final BigDecimal ITEM_UNIT_PRICE = BigDecimal.valueOf(123.5);
     static final int ITEM_REGULAR_COUNT = 2;
     static final BigDecimal ITEM_REGULAR_PRICE = BigDecimal.valueOf(247.0);
     static final int ITEM_SPECIAL_COUNT = 5;
@@ -32,26 +48,30 @@ public class BasketServiceStubTest {
 
     BasketItemRepository basketItemsRepo = new StubBasketItemRepository();
 
-    ItemsClient items = Mockito.mock(ItemsClient.class);
+    @Autowired
+    ItemsClient items;
 
-    SpecialClient specials = Mockito.mock(SpecialClient.class);
+    @Autowired
+    SpecialClient specials;
 
     MathProperties math = new MathProperties();
 
-    BasketItemService basketItems = new BasketItemService(basketItemsRepo, items, specials, math);
+    BasketItemService basketItems;
 
     BasketRepository basketsRepo = new StubBasketRepository();
 
-    BasketService baskets = new BasketService(basketsRepo, basketItems, math);
+    BasketService baskets;
+
+    @Before
+    public void setUp() {
+        basketItems = new BasketItemService(basketItemsRepo, items, specials, math);
+        baskets = new BasketService(basketsRepo, basketItems, math);
+    }
 
     @Test
     public void shouldUpdateBasketWithRegularPriceItem() {
         // given
         Basket basket = baskets.create();
-        doReturn(new ItemRepresentation(ITEM_NAME, ITEM_UNIT_PRICE))
-                .when(items).findOne(ITEM_ID);
-        doReturn(new SpecialCalculation(null, ITEM_REGULAR_PRICE))
-                .when(specials).calculateFor(ITEM_ID, requestCalculationFor(ITEM_UNIT_PRICE, ITEM_REGULAR_COUNT));
 
         // when
         BasketUpdateDiff diff = baskets.updateItem(basket.getId(), ITEM_ID, ITEM_REGULAR_COUNT);
@@ -72,10 +92,6 @@ public class BasketServiceStubTest {
     public void shouldUpdateBasketWithSpecialPriceItem() {
         // given
         Basket basket = baskets.create();
-        doReturn(new ItemRepresentation(ITEM_NAME, ITEM_UNIT_PRICE))
-                .when(items).findOne(ITEM_ID);
-        doReturn(new SpecialCalculation(SPECIAL_ID, ITEM_SPECIAL_PRICE))
-                .when(specials).calculateFor(ITEM_ID, requestCalculationFor(ITEM_UNIT_PRICE, ITEM_SPECIAL_COUNT));
 
         // when
         BasketUpdateDiff diff = baskets.updateItem(basket.getId(), ITEM_ID, ITEM_SPECIAL_COUNT);
