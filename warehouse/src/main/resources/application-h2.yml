@@ -1,8 +1,0 @@
-spring:
-  datasource:
-    url: "jdbc:h2:mem:store;MODE=PostgreSQL;IGNORECASE=TRUE;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false;"
-    username: ""
-    password: ""
-  jpa:
-    hibernate:
-      ddl-auto: "none"
