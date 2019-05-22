@@ -1,7 +1,0 @@
-server:
-  port: 9120
-
-spring:
-  data:
-    mongodb:
-      uri: "mongodb://${MONGO_USER:root}:${MONGO_PASSWORD:sprio}@${MONGO_PORT_27017_TCP_ADDR:localhost}:${MONGO_PORT_27017_TCP_PORT:27017}/${MONGO_DB:marketing}?authSource=${MONGO_AUTH_DB:admin}"

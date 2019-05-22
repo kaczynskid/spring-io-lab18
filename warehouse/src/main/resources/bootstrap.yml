@@ -2,6 +2,7 @@ spring:
   application:
     name: "warehouse"
   cloud:
+    # config first
     config:
       uri: "http://localhost:9000"
       fail-fast: true
