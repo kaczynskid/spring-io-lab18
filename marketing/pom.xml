@@ -133,6 +133,9 @@
 				<artifactId>spring-cloud-contract-maven-plugin</artifactId>
 				<version>2.1.1.RELEASE</version>
 				<extensions>true</extensions>
+				<configuration>
+					<baseClassForTests>io.spring.lab.marketing.MarketingContractTestBase</baseClassForTests>
+				</configuration>
 			</plugin>
 
 			<plugin>
