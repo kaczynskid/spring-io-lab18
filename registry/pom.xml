@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.spring.lab</groupId>
-	<artifactId>config</artifactId>
+	<artifactId>registry</artifactId>
 	<version>0.0.18-SNAPSHOT</version>
-	<name>Spring IO Lab Config</name>
-	<description>Spring IO Lab Config</description>
+	<name>Spring IO Lab Registry</name>
+	<description>Spring IO Lab Registry</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -30,7 +30,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-config-server</artifactId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 		</dependency>
 
 		<dependency>
