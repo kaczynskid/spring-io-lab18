@@ -4,16 +4,15 @@ import java.math.BigDecimal;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureMockRestServiceServer;
 import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
 import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import io.spring.lab.math.MathProperties;
+import io.spring.lab.store.SpringTestBase;
 import io.spring.lab.store.basket.item.BasketItem;
 import io.spring.lab.store.basket.item.BasketItemRepository;
 import io.spring.lab.store.basket.item.BasketItemService;
@@ -25,7 +24,6 @@ import io.spring.lab.store.special.SpecialClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
 @RestClientTest(components = {
         SimpleItemsClient.class,
         SimpleSpecialClient.class
@@ -36,7 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 }, stubsMode = StubRunnerProperties.StubsMode.LOCAL)
 @AutoConfigureWebClient(registerRestTemplate = true)
 @AutoConfigureMockRestServiceServer(enabled = false)
-public class BasketServiceStubTest {
+public class BasketServiceStubTest extends SpringTestBase {
 
     static final long ITEM_ID = 11L;
     static final String ITEM_NAME = "Coffee Mug";

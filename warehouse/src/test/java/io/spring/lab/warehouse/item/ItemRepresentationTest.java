@@ -3,22 +3,21 @@ package io.spring.lab.warehouse.item;
 import java.math.BigDecimal;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
+
+import io.spring.lab.warehouse.SpringTestBase;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
 @JsonTest
 @TestPropertySource(properties = {
         "spring.jackson.serialization.indent-output=true"
 })
-public class ItemRepresentationTest {
+public class ItemRepresentationTest extends SpringTestBase {
 
     @Autowired
     JacksonTester<ItemRepresentation> json;

@@ -1,22 +1,15 @@
-package io.spring.lab.marketing;
+package io.spring.lab.store;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
 @ActiveProfiles("test")
 @TestPropertySource(properties = {
-		"spring.cloud.bootstrap.enabled=false"
+        "spring.cloud.bootstrap.enabled=false"
 })
-public class MarketingApplicationTests {
-
-	@Test
-	public void contextLoads() {
-	}
+public abstract class SpringTestBase {
 
 }

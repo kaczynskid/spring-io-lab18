@@ -3,3 +3,11 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: "none"
+
+uri:
+  customizer:
+    enabled: true
+
+eureka:
+  client:
+    enabled: false

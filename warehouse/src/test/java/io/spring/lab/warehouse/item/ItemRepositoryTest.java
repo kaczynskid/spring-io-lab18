@@ -11,7 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Repository;
 
-import io.spring.lab.warehouse.SpringTestBase;
+import io.spring.lab.warehouse.SpringDbTestBase;
 import io.spring.lab.warehouse.WarehousePersistenceConfig;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,7 +22,7 @@ import static org.springframework.context.annotation.FilterType.ASSIGNABLE_TYPE;
         @ComponentScan.Filter(type = ASSIGNABLE_TYPE, classes = WarehousePersistenceConfig.class),
         @ComponentScan.Filter(type = ANNOTATION, classes = Repository.class)
 })
-public class ItemRepositoryTest extends SpringTestBase {
+public class ItemRepositoryTest extends SpringDbTestBase {
 
     @Autowired
     TestEntityManager jpa;
