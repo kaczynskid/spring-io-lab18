@@ -8,3 +8,11 @@ org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient=\
 org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner=\
   io.spring.lab.stubrunner.StubRunnerUriCustomizerAutoConfiguration
 
+io.spring.lab.cloud.AutoConfigureRibbon=\
+  org.springframework.cloud.netflix.ribbon.RibbonAutoConfiguration
+
+io.spring.lab.cloud.AutoConfigureFeign=\
+  org.springframework.cloud.openfeign.FeignAutoConfiguration,\
+  org.springframework.cloud.openfeign.encoding.FeignAcceptGzipEncodingAutoConfiguration,\
+  org.springframework.cloud.openfeign.encoding.FeignContentGzipEncodingAutoConfiguration,\
+  org.springframework.cloud.openfeign.ribbon.FeignRibbonClientAutoConfiguration
