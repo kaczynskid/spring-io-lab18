@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
@@ -51,5 +52,10 @@ public class StoreCloudConfig {
     @EnableFeignClients
     @ConditionalOnFeignClient
     public static class StoreFeignClientsConfig {
+    }
+
+    @Configuration
+    @EnableCircuitBreaker
+    public static class StoreCircuitBreakerConfig {
     }
 }

@@ -1,5 +1,6 @@
 package io.spring.lab.math;
 
+import java.math.BigDecimal;
 import java.math.MathContext;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -20,5 +21,9 @@ public class MathProperties {
 
     public MathContext getContext() {
         return new MathContext(precision, HALF_EVEN);
+    }
+
+    public BigDecimal bigDecimal(long unscaledVal) {
+        return BigDecimal.valueOf(unscaledVal * (long) Math.pow(10, scale), scale);
     }
 }
