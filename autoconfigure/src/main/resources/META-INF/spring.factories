@@ -8,6 +8,9 @@ org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient=\
 org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner=\
   io.spring.lab.stubrunner.StubRunnerUriCustomizerAutoConfiguration
 
+io.spring.lab.math.AutoConfigureMath=\
+  io.spring.lab.math.MathAutoConfiguration
+
 io.spring.lab.cloud.AutoConfigureRibbon=\
   org.springframework.cloud.netflix.ribbon.RibbonAutoConfiguration
 

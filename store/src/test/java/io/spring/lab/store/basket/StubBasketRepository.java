@@ -5,9 +5,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.boot.test.context.TestComponent;
+
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.reflect.FieldUtils.writeField;
 
+@TestComponent
 class StubBasketRepository implements BasketRepository {
 
     private final AtomicLong seq = new AtomicLong();

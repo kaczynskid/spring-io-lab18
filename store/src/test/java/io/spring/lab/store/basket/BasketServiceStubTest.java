@@ -2,45 +2,37 @@ package io.spring.lab.store.basket;
 
 import java.math.BigDecimal;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureMockRestServiceServer;
-import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
-import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
-import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
 
 import io.spring.lab.cloud.AutoConfigureFeign;
 import io.spring.lab.cloud.AutoConfigureRibbon;
-import io.spring.lab.math.MathProperties;
+import io.spring.lab.math.AutoConfigureMath;
+import io.spring.lab.repository.AutoConfigureStubRepositories;
 import io.spring.lab.stereotype.WebClient;
 import io.spring.lab.store.SpringTestBase;
 import io.spring.lab.store.StoreCloudConfig;
+import io.spring.lab.store.StoreRestTemplateConfig;
 import io.spring.lab.store.basket.item.BasketItem;
-import io.spring.lab.store.basket.item.BasketItemRepository;
 import io.spring.lab.store.basket.item.BasketItemService;
-import io.spring.lab.store.basket.item.StubBasketItemRepository;
-import io.spring.lab.store.item.ItemsClient;
-import io.spring.lab.store.special.SpecialClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.context.annotation.FilterType.ANNOTATION;
 
 @RestClientTest(components = {
-        StoreCloudConfig.StoreFeignClientsConfig.class
+        StoreRestTemplateConfig.class,
+        StoreCloudConfig.StoreFeignClientsConfig.class,
+        BasketItemService.class,
+        BasketService.class
 }, includeFilters = {
-        @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = WebClient.class)
+        @ComponentScan.Filter(type = ANNOTATION, classes = WebClient.class)
 })
-@AutoConfigureStubRunner(ids = {
-        "io.spring.lab:warehouse",
-        "io.spring.lab:marketing"
-}, stubsMode = StubRunnerProperties.StubsMode.LOCAL)
-@AutoConfigureWebClient(registerRestTemplate = true)
-@AutoConfigureMockRestServiceServer(enabled = false)
+@AutoConfigureMath
 @AutoConfigureFeign
 @AutoConfigureRibbon
+@AutoConfigureStubRepositories
 public class BasketServiceStubTest extends SpringTestBase {
 
     static final long ITEM_ID = 11L;
@@ -51,27 +43,11 @@ public class BasketServiceStubTest extends SpringTestBase {
     static final BigDecimal ITEM_SPECIAL_PRICE = BigDecimal.valueOf(524.87);
     static final String SPECIAL_ID = "promo-15-off";
 
-    BasketItemRepository basketItemsRepo = new StubBasketItemRepository();
-
     @Autowired
-    ItemsClient items;
-
-    @Autowired
-    SpecialClient specials;
-
-    MathProperties math = new MathProperties();
-
     BasketItemService basketItems;
 
-    BasketRepository basketsRepo = new StubBasketRepository();
-
+    @Autowired
     BasketService baskets;
-
-    @Before
-    public void setUp() {
-        basketItems = new BasketItemService(basketItemsRepo, items, specials, math);
-        baskets = new BasketService(basketsRepo, basketItems, math);
-    }
 
     @Test
     public void shouldUpdateBasketWithRegularPriceItem() {

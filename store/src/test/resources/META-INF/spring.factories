@@ -1,0 +1,3 @@
+io.spring.lab.repository.AutoConfigureStubRepositories=\
+  io.spring.lab.store.basket.StubBasketRepository,\
+  io.spring.lab.store.basket.item.StubBasketItemRepository
