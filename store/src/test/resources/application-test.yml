@@ -6,8 +6,4 @@ spring:
 
 uri:
   customizer:
-    enabled: true
-
-eureka:
-  client:
     enabled: false

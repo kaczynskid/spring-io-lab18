@@ -5,12 +5,15 @@ import java.util.Optional;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import io.spring.lab.cloud.ConditionalOnMissingFeignClient;
+import io.spring.lab.stereotype.WebClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Component
+@WebClient
 @AllArgsConstructor
+@ConditionalOnMissingFeignClient
 public class SimpleSpecialClient implements SpecialClient {
 
     private static final String BASE_URI = "http://marketing";

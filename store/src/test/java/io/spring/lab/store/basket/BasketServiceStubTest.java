@@ -10,23 +10,28 @@ import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebCl
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
 import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 
+import io.spring.lab.cloud.AutoConfigureFeign;
+import io.spring.lab.cloud.AutoConfigureRibbon;
 import io.spring.lab.math.MathProperties;
+import io.spring.lab.stereotype.WebClient;
 import io.spring.lab.store.SpringTestBase;
+import io.spring.lab.store.StoreCloudConfig;
 import io.spring.lab.store.basket.item.BasketItem;
 import io.spring.lab.store.basket.item.BasketItemRepository;
 import io.spring.lab.store.basket.item.BasketItemService;
 import io.spring.lab.store.basket.item.StubBasketItemRepository;
 import io.spring.lab.store.item.ItemsClient;
-import io.spring.lab.store.item.SimpleItemsClient;
-import io.spring.lab.store.special.SimpleSpecialClient;
 import io.spring.lab.store.special.SpecialClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RestClientTest(components = {
-        SimpleItemsClient.class,
-        SimpleSpecialClient.class
+        StoreCloudConfig.StoreFeignClientsConfig.class
+}, includeFilters = {
+        @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = WebClient.class)
 })
 @AutoConfigureStubRunner(ids = {
         "io.spring.lab:warehouse",
@@ -34,6 +39,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 }, stubsMode = StubRunnerProperties.StubsMode.LOCAL)
 @AutoConfigureWebClient(registerRestTemplate = true)
 @AutoConfigureMockRestServiceServer(enabled = false)
+@AutoConfigureFeign
+@AutoConfigureRibbon
 public class BasketServiceStubTest extends SpringTestBase {
 
     static final long ITEM_ID = 11L;
