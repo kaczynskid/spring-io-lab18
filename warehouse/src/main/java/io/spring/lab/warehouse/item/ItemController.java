@@ -3,6 +3,7 @@ package io.spring.lab.warehouse.item;
 import java.net.URI;
 import java.util.List;
 
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,12 +32,15 @@ public class ItemController {
 
     private ItemService items;
 
+    private Environment env;
+
     @GetMapping
     List<ItemRepresentation> findAll() {
         List<Item> list = items.findAll();
         log.info("Found {} items.", list.size());
         return list.stream()
                 .map(ItemRepresentation::of)
+                .map(this::withInstanceId)
                 .collect(toList());
     }
 
@@ -44,7 +48,7 @@ public class ItemController {
     public ItemRepresentation findOne(@PathVariable("id") long id) {
         Item item = items.findOne(id);
         log.info("Found item {}.", item.getName());
-        return ItemRepresentation.of(item);
+        return withInstanceId(ItemRepresentation.of(item));
     }
 
     @PostMapping
@@ -61,7 +65,7 @@ public class ItemController {
     @PutMapping("/{id}/stock")
     public ItemRepresentation updateStock(@PathVariable("id") long id, @RequestBody ItemStockUpdate changes) {
         log.info("Update item stock {}.", changes);
-        return ItemRepresentation.of(items.updateStock(changes.withId(id)));
+        return withInstanceId(ItemRepresentation.of(items.updateStock(changes.withId(id))));
     }
 
     @ExceptionHandler(ItemNotFound.class)
@@ -72,5 +76,9 @@ public class ItemController {
     @ExceptionHandler(OutOfStock.class)
     public ResponseEntity<ErrorMessage> handleOutOfStock(OutOfStock e) {
         return ErrorMessage.messageResponseOf(BAD_REQUEST, e);
+    }
+
+    private ItemRepresentation withInstanceId(ItemRepresentation representation) {
+        return representation.withInstanceId(env.getProperty("local.server.port"));
     }
 }

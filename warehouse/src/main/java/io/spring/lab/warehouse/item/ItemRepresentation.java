@@ -28,4 +28,8 @@ public class ItemRepresentation {
 	Item asItem() {
 		return new Item(null, name, stock, price);
 	}
+
+	ItemRepresentation withInstanceId(String instanceId) {
+		return new ItemRepresentation(name, stock, price, instanceId);
+	}
 }

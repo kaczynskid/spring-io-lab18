@@ -28,7 +28,7 @@ public class SimpleItemsClient implements ItemsClient {
         ItemRepresentation representation = rest.exchange(
                 ITEM_URI, GET, emptyEntity(), ItemRepresentation.class, id)
                 .getBody();
-        log.info("Simple client got item {}", representation.getName());
+        log.info("Simple client got item {} from instance {}", representation.getName(), representation.getInstanceId());
         return representation;
     }
 

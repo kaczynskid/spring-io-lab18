@@ -18,7 +18,8 @@ Contract.make {
         }
         body([
                 name: 'Coffee Mug',
-                price: 123.50
+                price: 123.50,
+                instanceId: '8080'
         ])
     }
 }
