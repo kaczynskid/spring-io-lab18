@@ -8,7 +8,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
 @TestPropertySource(properties = {
-        "spring.cloud.bootstrap.enabled=false"
+        "spring.cloud.bootstrap.enabled=false",
+        "debug=true"
 })
 public abstract class SpringTestBase {
 
