@@ -3,6 +3,7 @@ package io.spring.lab.gateway;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,6 +26,9 @@ public class GatewaySecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        ApplicationContext context = http.getSharedObject(ApplicationContext.class);
+        OAuth2LogoutSuccessHandler logoutSuccessHandler = context.getBean(OAuth2LogoutSuccessHandler.class);
+
         http
                 .authorizeRequests()
                     .anyRequest().authenticated()
@@ -32,6 +36,9 @@ public class GatewaySecurityConfig extends WebSecurityConfigurerAdapter {
                 .oauth2Login()
                         .userInfoEndpoint()
                                 .userAuthoritiesMapper(this::grantedAuthoritiesMapper);
+
+        http.logout()
+                .logoutSuccessHandler(logoutSuccessHandler);
     }
 
     private Collection<? extends GrantedAuthority> grantedAuthoritiesMapper(Collection<? extends GrantedAuthority> authorities) {
