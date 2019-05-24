@@ -1,0 +1,20 @@
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            authorization-uri: "http://localhost:8080/auth/realms/sprio/protocol/openid-connect/auth"
+            token-uri: "http://localhost:8080/auth/realms/sprio/protocol/openid-connect/token"
+            user-info-uri: "http://localhost:8080/auth/realms/sprio/protocol/openid-connect/userinfo"
+            jwk-set-uri: "http://localhost:8080/auth/realms/sprio/protocol/openid-connect/certs"
+            user-name-attribute: "preferred_username"
+        registration:
+          keycloak:
+            client-id: "store-app"
+            client-secret: "ca5bcf69-7f00-46d1-9ab1-dce91b86f00a"
+            client-name: "Keycloak"
+            authorization-grant-type: "authorization_code"
+            redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope:
+              - openid
