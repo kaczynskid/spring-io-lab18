@@ -6,3 +6,11 @@ spring:
           destination: "item-stock-update"
           content-type: "application/json"
           group: "warehouse"
+          max-attempts: 3
+      rabbit:
+        bindings:
+          stockUpdate:
+            consumer:
+              requeue-rejected: true
+              auto-bind-dlq: true
+              republish-to-dlq: true
