@@ -6,3 +6,5 @@ spring:
         checkoutItem:
           destination: "item-stock-update"
           content-type: "application/json"
+          producer:
+            required-groups: "warehouse"
