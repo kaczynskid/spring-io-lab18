@@ -5,3 +5,4 @@ spring:
         stockUpdate:
           destination: "item-stock-update"
           content-type: "application/json"
+          group: "warehouse"
