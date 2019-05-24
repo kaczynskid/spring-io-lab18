@@ -135,6 +135,11 @@
 			<artifactId>spring-cloud-starter-contract-verifier</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-stream-test-support</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -181,6 +186,16 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-contract-maven-plugin</artifactId>
+				<version>2.1.1.RELEASE</version>
+				<extensions>true</extensions>
+				<configuration>
+					<baseClassForTests>io.spring.lab.store.StoreContractTestBase</baseClassForTests>
+				</configuration>
 			</plugin>
 
 			<plugin>

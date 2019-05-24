@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 
 import io.spring.lab.cloud.AutoConfigureFeign;
@@ -17,6 +18,7 @@ import io.spring.lab.store.StoreCloudConfig;
 import io.spring.lab.store.StoreRestTemplateConfig;
 import io.spring.lab.store.basket.item.BasketItem;
 import io.spring.lab.store.basket.item.BasketItemService;
+import io.spring.lab.store.item.ItemStreamsConfig.ItemStreamsBinding;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.context.annotation.FilterType.ANNOTATION;
@@ -42,6 +44,9 @@ public class BasketServiceStubTest extends SpringTestBase {
     static final int ITEM_SPECIAL_COUNT = 5;
     static final BigDecimal ITEM_SPECIAL_PRICE = BigDecimal.valueOf(524.87);
     static final String SPECIAL_ID = "promo-15-off";
+
+    @MockBean
+    ItemStreamsBinding binding;
 
     @Autowired
     BasketItemService basketItems;
