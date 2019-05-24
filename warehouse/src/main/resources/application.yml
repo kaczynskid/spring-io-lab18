@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        stockUpdate:
+          destination: "item-stock-update"
+          content-type: "application/json"
