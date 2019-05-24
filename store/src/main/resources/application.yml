@@ -1,0 +1,8 @@
+# makes it available also for contract tests
+spring:
+  cloud:
+    stream:
+      bindings:
+        checkoutItem:
+          destination: "item-stock-update"
+          content-type: "application/json"
